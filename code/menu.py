@@ -1,27 +1,50 @@
-import pygame
 import sys
-from const import WINDOW_WIDTH, WINDOW_HEIGHT, MENU_OPTIONS
+
+import pygame
+from pygame import Surface, Rect
+from pygame.font import Font
+
+from const import COLOR_GREEN, COLOR_WHITE, WINDOW_WIDTH, WINDOW_HEIGHT, MENU_OPTIONS, MENU_TITLE
+
+from commands import Commands
 
 class Menu:
     def __init__(self): # inicializando Menu
         pygame.init()
         self.window = pygame.display.set_mode(size=(WINDOW_WIDTH, WINDOW_HEIGHT))
+        self.clock = pygame.time.Clock()
+        self.font = pygame.font.SysFont("arial", 20)
         self.option = 0
+
+        self.loadCommands = Commands(self.window)
         self.startingGame()    
 
-    def startingGame(self): # Carregando tela de fundo        
+
+    def startingGame(self): # Carregando tela de fundo  
+        self.loadCommands.run()
+
+
         while True:
-            self.loadingBackground() 
-            self.wrintingOnTheScreen()
-            self.capturingSelectedOption()
             
+            self.window.fill((0, 0, 0)) # Limpa a tela
+
+            self.loadingBackground() 
+            self.wrintingOnTheScreen() 
+            self.capturingSelectedOption()
+
             pygame.display.flip() # Atualizamos a tela (importante!)
+            self.clock.tick(60) # Limitamos a taxa de quadros a 60 FPS
 
     def loadingBackground(self): # Carregando tela de fundo
         pass
 
     def wrintingOnTheScreen(self): # Escrevendo na tela
-        pass
+        # Adicione um título para o menu se quiser!
+        self.draw_text(MENU_TITLE, COLOR_WHITE, (WINDOW_WIDTH / 2, 100))
+
+        for i in range(len(MENU_OPTIONS)):
+            color = COLOR_GREEN if i == self.option else COLOR_WHITE
+            self.draw_text(MENU_OPTIONS[i], color, (WINDOW_WIDTH / 2, 250 + 40 * i))
 
     def capturingSelectedOption(self): # Capturando opção selecionada
         for event in pygame.event.get():
@@ -50,7 +73,7 @@ class Menu:
             case 0: # JOGAR
                 print('Iniciando o jogo...')
             case 1: # COMANDOS
-                print('Exibindo os comandos...')
+                self.loadCommands.run()
             case 2: # AJUSTES
                 print('Exibindo os ajustes...')
             case 3: # SCORES
@@ -59,3 +82,8 @@ class Menu:
                 print('Saindo do jogo...')
                 pygame.quit()
                 sys.exit()
+
+    def draw_text(self, text: str, text_color: tuple, text_center_pos: tuple):
+        text_surf = self.font.render(text, True, text_color).convert_alpha() # Renderizando o texto para uma superfície
+        text_rect = text_surf.get_rect(center=text_center_pos) # Obtendo o retângulo do texto e definindo sua posição central
+        self.window.blit(text_surf, text_rect) # Desenhando o texto na janela do jogo usando a função blit()
