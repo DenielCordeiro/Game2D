@@ -25,12 +25,7 @@ MENU_COMMANDS = ('MENU:', 'Seta para Cima ↑ - Subir', 'Seta para baico ↓ - D
 MENU_COMMANDS_RETURN = ('Prescione ENTER para continuar.')
 
 # WINDOW
-<<<<<<< HEAD
-WINDOW_WIDTH = 580
-WINDOW_HEIGHT = 480
 WINDOW_GAME_WIDTH = 580
 WINDOW_GAME_HEIGHT = 480
-=======
 WINDOW_MENU_WIDTH = 580
 WINDOW_MENU_HEIGHT = 480
->>>>>>> d3096db165c7457aca01f8fcb1f13a0740689a61
