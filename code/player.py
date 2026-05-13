@@ -1,3 +1,4 @@
+import pygame
 class Player:
     def __init__(self, name):
         self.name = name
@@ -7,4 +8,5 @@ class Player:
         pass
 
     def movePlayer(self):
-        pass
+        while True:
+            return
