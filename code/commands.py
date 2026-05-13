@@ -2,6 +2,15 @@ import sys
 import pygame
 from pygame import Surface
 
+from const import (
+    WINDOW_MENU_HEIGHT,
+    WINDOW_MENU_WIDTH,
+    COLOR_WHITE,
+    MENU_COMMANDS_TITLE,
+    MENU_COMMANDS_GAME,
+    MENU_COMMANDS,
+    MENU_COMMANDS_RETURN
+)
 
 class Commands:
     def __init__(self, window: Surface):
@@ -12,8 +21,7 @@ class Commands:
     def run(self):
         while True:
             self.window.fill((0, 0, 0)) # Limpa a tela
-
-            self.wrintingOnTheScreen()
+            self.wrintingOnTheScreen() # Desenha os textos na tela
 
             # Captura eventos na tela de comandos
             for event in pygame.event.get():
@@ -22,24 +30,24 @@ class Commands:
                     sys.exit() # saindo do programa
                 
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE: # Tecla para VOLTAR
+                    if event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER: # Tecla para VOLTAR
                         return # Sai do loop do run e volta para quem chamou
 
             pygame.display.flip() # Atualiza a tela
             self.clock.tick(60) # Limita a taxa de quadros a 60 FPS
 
-    def wrintingOnTheScreen(self):
-        self.draw_text("Comandos", (255, 255, 0), (290, 100))
+    def wrintingOnTheScreen(self) -> None:
+        self.draw_text(MENU_COMMANDS_TITLE, COLOR_WHITE, (WINDOW_MENU_WIDTH / 2, 100))
 
-        self.draw_text("Menu:", (255, 255, 255), (450, 200))
-        self.draw_text("Seta para Cima - Cima", (255, 255, 255), (450, 230))
-        self.draw_text("Seta para Baixo - Baixo", (255, 255, 255), (450, 260))
-        self.draw_text("Enter - Selecionar", (255, 255, 255), (450, 290))
+        for command in range(len(MENU_COMMANDS_GAME)): # Percorre todos os comandos do jogo
+            self.draw_text(MENU_COMMANDS_GAME[command], COLOR_WHITE, (160, 190 + 30 * command))
 
-        self.draw_text("Jogo:", (255, 255, 255), (150, 200))
-        self.draw_text("space - Pular", (255, 255, 255), (150, 230))
+        for command in range(len(MENU_COMMANDS)): # percorre todos os comandos do menu
+            self.draw_text(MENU_COMMANDS[command], COLOR_WHITE, (400, 190 + 30 * command))
+
+        self.draw_text(MENU_COMMANDS_RETURN, COLOR_WHITE, (WINDOW_MENU_WIDTH / 2 + 10, WINDOW_MENU_HEIGHT - 70))
 
     def draw_text(self, text, color, pos):
-        surf = self.font.render(text, True, color).convert_alpha() # Renderizando o texto para uma superfície
-        rect = surf.get_rect(center=pos) # Obtendo o retângulo do texto e definindo sua posição central
-        self.window.blit(surf, rect) # Desenhando o texto na janela do jogo usando a função blit()
+            surf = self.font.render(text, True, color).convert_alpha() # Renderizando o texto para uma superfície
+            rect = surf.get_rect(center=pos) # Obtendo o retângulo do texto e definindo sua posição central
+            self.window.blit(surf, rect) # Desenhando o texto na janela do jogo usando a função blit()

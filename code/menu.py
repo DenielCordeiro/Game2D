@@ -1,17 +1,18 @@
 import sys
+from operator import truediv
 
 import pygame
 from pygame import Surface, Rect
 from pygame.font import Font
 
-from const import COLOR_GREEN, COLOR_WHITE, WINDOW_WIDTH, WINDOW_HEIGHT, MENU_OPTIONS, MENU_TITLE
+from const import COLOR_GREEN, COLOR_WHITE, WINDOW_MENU_WIDTH, WINDOW_MENU_HEIGHT, MENU_OPTIONS, MENU_TITLE
 
 from commands import Commands
 
 class Menu:
     def __init__(self): # inicializando Menu
         pygame.init()
-        self.window = pygame.display.set_mode(size=(WINDOW_WIDTH, WINDOW_HEIGHT))
+        self.window = pygame.display.set_mode(size=(WINDOW_MENU_WIDTH, WINDOW_MENU_HEIGHT))
         self.clock = pygame.time.Clock()
         self.font = pygame.font.SysFont("arial", 20)
         self.option = 0
@@ -20,12 +21,10 @@ class Menu:
         self.startingGame()    
 
 
-    def startingGame(self): # Carregando tela de fundo  
+    def startingGame(self) -> None: # Carregando tela de fundo
         self.loadCommands.run()
 
-
         while True:
-            
             self.window.fill((0, 0, 0)) # Limpa a tela
 
             self.loadingBackground() 
@@ -35,16 +34,19 @@ class Menu:
             pygame.display.flip() # Atualizamos a tela (importante!)
             self.clock.tick(60) # Limitamos a taxa de quadros a 60 FPS
 
-    def loadingBackground(self): # Carregando tela de fundo
-        pass
+
+    def loadingBackground(self) -> bool: # Carregando tela de fundo
+        teste: bool = False
+
+        return teste
 
     def wrintingOnTheScreen(self): # Escrevendo na tela
         # Adicione um título para o menu se quiser!
-        self.draw_text(MENU_TITLE, COLOR_WHITE, (WINDOW_WIDTH / 2, 100))
+        self.draw_text(MENU_TITLE, COLOR_WHITE, (WINDOW_MENU_WIDTH / 2, 100))
 
         for i in range(len(MENU_OPTIONS)):
             color = COLOR_GREEN if i == self.option else COLOR_WHITE
-            self.draw_text(MENU_OPTIONS[i], color, (WINDOW_WIDTH / 2, 250 + 40 * i))
+            self.draw_text(MENU_OPTIONS[i], color, (WINDOW_MENU_WIDTH / 2, 200 + 40 * i))
 
     def capturingSelectedOption(self): # Capturando opção selecionada
         for event in pygame.event.get():
@@ -65,7 +67,7 @@ class Menu:
                     else:
                         self.option = len(MENU_OPTIONS) - 1
 
-                if event.key == pygame.K_RETURN: # Pressionando enter
+                if event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER: # Pressionando enter
                     return self.executingOption(self.option)
                         
     def executingOption(self, option: int): # Executando opção selecionada
