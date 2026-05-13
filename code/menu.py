@@ -1,13 +1,10 @@
 import sys
-from operator import truediv
 
 import pygame
-from pygame import Surface, Rect
-from pygame.font import Font
-
 from const import COLOR_GREEN, COLOR_WHITE, WINDOW_MENU_WIDTH, WINDOW_MENU_HEIGHT, MENU_OPTIONS, MENU_TITLE
 
 from commands import Commands
+from game import Game
 
 class Menu:
     def __init__(self): # inicializando Menu
@@ -73,7 +70,7 @@ class Menu:
     def executingOption(self, option: int): # Executando opção selecionada
         match option:
             case 0: # JOGAR
-                print('Iniciando o jogo...')
+                pass
             case 1: # COMANDOS
                 self.loadCommands.run()
             case 2: # AJUSTES
