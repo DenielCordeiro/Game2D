@@ -1,6 +1,7 @@
 import sys
 import pygame
-from pygame import Surface
+
+from background import Background
 
 from const import (
     WINDOW_MENU_HEIGHT,
@@ -13,14 +14,14 @@ from const import (
 )
 
 class Commands:
-    def __init__(self, window: Surface):
+    def __init__(self, window):
         self.window = window # Recebendo a janela do jogo para desenhar os comandos
         self.font = pygame.font.SysFont("arial", 20) # Criando fonte para os textos
         self.clock = pygame.time.Clock() # Criando um relógio para controlar a taxa de quadros
 
     def run(self):
         while True:
-            self.window.fill((0, 0, 0)) # Limpa a tela
+            self.loadingBackground() # Limpa a tela
             self.wrintingOnTheScreen() # Desenha os textos na tela
 
             # Captura eventos na tela de comandos
@@ -36,6 +37,10 @@ class Commands:
             pygame.display.flip() # Atualiza a tela
             self.clock.tick(60) # Limita a taxa de quadros a 60 FPS
 
+    def loadingBackground(self) -> None:  # Carregando tela de fundo
+        self.background = Background(name='menu_background/menu', position=(0, 0))
+        self.background.draw(self.window)
+
     def wrintingOnTheScreen(self) -> None:
         self.draw_text(MENU_COMMANDS_TITLE, COLOR_WHITE, (WINDOW_MENU_WIDTH / 2, 100))
 
@@ -47,7 +52,7 @@ class Commands:
 
         self.draw_text(MENU_COMMANDS_RETURN, COLOR_WHITE, (WINDOW_MENU_WIDTH / 2 + 10, WINDOW_MENU_HEIGHT - 70))
 
-    def draw_text(self, text, color, pos):
+    def draw_text(self, text, color, pos) -> None:
             surf = self.font.render(text, True, color).convert_alpha() # Renderizando o texto para uma superfície
             rect = surf.get_rect(center=pos) # Obtendo o retângulo do texto e definindo sua posição central
             self.window.blit(surf, rect) # Desenhando o texto na janela do jogo usando a função blit()
