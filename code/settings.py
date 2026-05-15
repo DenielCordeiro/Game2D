@@ -54,7 +54,12 @@ class Settings:
                             self.option = len(self.options) - 1
 
                     if event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER:  # Pressionando enter
-                        return self.executingOption(self.option)
+                        optionReturn = self.executingOption(self.option)
+
+                        if optionReturn == False:
+                            pygame.display.flip()
+                        else:
+                            return
 
             pygame.display.flip() # Atualiza a tela
             self.clock.tick(60) # Limita o FPS a 60
@@ -80,11 +85,17 @@ class Settings:
         text_rect = text_surf.get_rect(center = text_center_pos)  # Obtendo o retângulo do texto e definindo sua posição central
         self.window.blit(text_surf, text_rect)  # Desenhando o texto na janela do jogo usando a função blit()
 
-    def executingOption(self, option: int) -> None:
+    def executingOption(self, option: int) -> bool:
         match option:
             case 0:
-                print('Opção escolhida: ', self.optionsFPSOn[option])
-                return
+                if (self.options[0] == SETTINGS_SHOW_FPS):
+                    self.options = self.optionsFPSOff
+                    self.fps_enabled = False
+                else:
+                    self.options = self.optionsFPSOn
+                    self.fps_enabled = True
+
+                return False
+
             case 1:
-                print('Opção escolhida: ', self.optionsFPSOn[option])
-                return
+                return True
