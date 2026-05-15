@@ -2,6 +2,7 @@ import sys
 import pygame
 
 from background import Background
+from score import Score
 from commands import Commands
 from settings import Settings
 
@@ -19,6 +20,7 @@ class Menu:
         self.loadingBackground()
         self.loadCommands = Commands(self.window)
         self.loadSettings = Settings(self.window, self.fps_enabled)
+        self.loadScores = Score(self.window)
 
         self.startingGame()
 
@@ -47,7 +49,7 @@ class Menu:
             color = COLOR_GREEN if i == self.option else COLOR_WHITE
             self.draw_text(MENU_OPTIONS[i], color, (WINDOW_MENU_WIDTH / 2, 200 + 40 * i))
 
-    def capturingSelectedOption(self): # Capturando opção selecionada
+    def capturingSelectedOption(self) -> None: # Capturando opção selecionada
         for event in pygame.event.get():
             if event.type == pygame.QUIT: # Fechando o jogo
                 pygame.quit() # Fechando o pygame
@@ -78,7 +80,7 @@ class Menu:
             case 2: # AJUSTES
                 self.loadSettings.run()
             case 3: # SCORES
-                print('Exibindo os scores...')
+                self.loadScores.run()
             case 4: # SAIR
                 pygame.quit()
                 sys.exit()

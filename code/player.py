@@ -1,12 +1,13 @@
-import pygame
 class Player:
     def __init__(self, name):
         self.name = name
-        print('Jogador ', name, 'iniciado com sucesso!')
-
-    def newPlayer(self):
+        
+    def drawPlayer(self):
         pass
 
     def movePlayer(self):
         while True:
             return
+        
+    def lifePlayer(self):
+        pass

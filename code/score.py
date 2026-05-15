@@ -1,12 +1,21 @@
 class Score:
-    def __init__(self, score: int = 0):
-        self.score = score
+    def __init__(self, window):
+        self.window = window
+        self.score: int = 0
+        self.scores: list[int] = []
 
-    def add_score(self, points: int):
+    def run(self) -> None:
+        pass
+
+    def addScore(self, points: int) -> None:
         self.score += points
+        self.scores.append(self.score)
 
-    def reset_score(self):
+    def resetScore(self) -> None:
         self.score = 0
 
-    def get_score(self) -> int:
+    def getScore(self) -> int:
         return self.score
+
+    def getScores(self) -> list[int]:
+        return self.scores
