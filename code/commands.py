@@ -7,10 +7,10 @@ from const import (
     WINDOW_MENU_HEIGHT,
     WINDOW_MENU_WIDTH,
     COLOR_WHITE,
-    MENU_COMMANDS_TITLE,
-    MENU_COMMANDS_GAME,
-    MENU_COMMANDS,
-    MENU_COMMANDS_RETURN
+    COMMANDS_TITLE,
+    COMMANDS_GAME,
+    COMMANDS,
+    COMMANDS_RETURN
 )
 
 class Commands:
@@ -42,15 +42,15 @@ class Commands:
         self.background.draw(self.window)
 
     def wrintingOnTheScreen(self) -> None:
-        self.draw_text(MENU_COMMANDS_TITLE, COLOR_WHITE, (WINDOW_MENU_WIDTH / 2, 100))
+        self.draw_text(COMMANDS_TITLE, COLOR_WHITE, (WINDOW_MENU_WIDTH / 2, 100))
 
-        for command in range(len(MENU_COMMANDS_GAME)): # Percorre todos os comandos do jogo
-            self.draw_text(MENU_COMMANDS_GAME[command], COLOR_WHITE, (160, 190 + 30 * command))
+        for command in range(len(COMMANDS_GAME)): # Percorre todos os comandos do jogo
+            self.draw_text(COMMANDS_GAME[command], COLOR_WHITE, (160, 190 + 30 * command))
 
-        for command in range(len(MENU_COMMANDS)): # percorre todos os comandos do menu
-            self.draw_text(MENU_COMMANDS[command], COLOR_WHITE, (400, 190 + 30 * command))
+        for command in range(len(COMMANDS)): # percorre todos os comandos do menu
+            self.draw_text(COMMANDS[command], COLOR_WHITE, (400, 190 + 30 * command))
 
-        self.draw_text(MENU_COMMANDS_RETURN, COLOR_WHITE, (WINDOW_MENU_WIDTH / 2 + 10, WINDOW_MENU_HEIGHT - 70))
+        self.draw_text(COMMANDS_RETURN, COLOR_WHITE, (WINDOW_MENU_WIDTH / 2 + 10, WINDOW_MENU_HEIGHT - 70))
 
     def draw_text(self, text, color, pos) -> None:
             surf = self.font.render(text, True, color).convert_alpha() # Renderizando o texto para uma superfície

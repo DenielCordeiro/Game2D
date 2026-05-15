@@ -3,6 +3,7 @@ import pygame
 
 from background import Background
 from commands import Commands
+from settings import Settings
 
 from const import COLOR_GREEN, COLOR_WHITE, WINDOW_MENU_WIDTH, WINDOW_MENU_HEIGHT, MENU_OPTIONS, MENU_TITLE
 
@@ -12,12 +13,14 @@ class Menu:
         self.window = pygame.display.set_mode(size=(WINDOW_MENU_WIDTH, WINDOW_MENU_HEIGHT))
         self.clock = pygame.time.Clock()
         self.font = pygame.font.SysFont("arial", 20)
-        self.option = 0
+        self.option: int = 0
+        self.fps_enabled: bool = False
 
         self.loadingBackground()
-
         self.loadCommands = Commands(self.window)
-        self.startingGame()    
+        self.loadSettings = Settings(self.window, self.fps_enabled)
+
+        self.startingGame()
 
 
     def startingGame(self) -> None: # Carregando tela de fundo
@@ -69,15 +72,14 @@ class Menu:
     def executingOption(self, option: int) -> None: # Executando opção selecionada
         match option:
             case 0: # JOGAR
-                pass
+                print('Exibindo os Jogo...')
             case 1: # COMANDOS
                 self.loadCommands.run()
             case 2: # AJUSTES
-                print('Exibindo os ajustes...')
+                self.loadSettings.run()
             case 3: # SCORES
                 print('Exibindo os scores...')
             case 4: # SAIR
-                print('Saindo do jogo...')
                 pygame.quit()
                 sys.exit()
 
