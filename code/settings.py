@@ -1,7 +1,18 @@
 import sys
 import pygame
 from background import Background
-from const import COLOR_WHITE, COLOR_GREEN, WINDOW_MENU_WIDTH, WINDOW_MENU_HEIGHT
+from const import (
+    COLOR_WHITE,
+    COLOR_GREEN,
+    WINDOW_MENU_WIDTH,
+    WINDOW_MENU_HEIGHT,
+    SETTINGS_TITLE,
+    SETTINGS_RETURN,
+    SETTINGS_SHOW_FPS,
+    SETTINGS_HIDDEN_FPS,
+    SETTINGS_STATUS_ON ,
+    SETTINGS_STATUS_OFF
+)
 
 class Settings:
     def __init__(self, window, fps_enabled: bool):
@@ -10,7 +21,8 @@ class Settings:
         self.clock = pygame.time.Clock() # Verifica os FPS
         self.fps_enabled = fps_enabled
         self.option = 0
-
+        self.optionsFPSOn = (SETTINGS_SHOW_FPS, SETTINGS_RETURN)
+        self.optionsFPSOff = (SETTINGS_HIDDEN_FPS, SETTINGS_RETURN)
 
     def run(self):
         while True:
@@ -22,13 +34,20 @@ class Settings:
                     pygame.quit()  # Fechando o pygame
                     sys.exit()  # saindo do programa
 
-
             pygame.display.flip() # Atualiza a tela
             self.clock.tick(60) # Limita o FPS a 60
 
     def wrintingOnTheScreen(self) -> None:
-        pass
+        self.draw_text(SETTINGS_TITLE, COLOR_WHITE, text_center_pos = (WINDOW_MENU_WIDTH / 2, 100))
 
+        if self.fps_enabled == True:
+            for i in range(len(self.optionsFPSOff)):
+                color = COLOR_GREEN if i == self.option else COLOR_WHITE
+                self.draw_text(self.optionsFPSOff[i], color, text_center_pos = (WINDOW_MENU_WIDTH / 2, 200 + 40 * i))
+        else:
+            for i in range(len(self.optionsFPSOn)):
+                color = COLOR_GREEN if i == self.option else COLOR_WHITE
+                self.draw_text(self.optionsFPSOn[i], color, text_center_pos = (WINDOW_MENU_WIDTH / 2, 200 + 40 * i))
 
     def loadingBackground(self) -> None:  # Carregando tela de fundo
         self.background = Background(name = 'menu_background/menu', position=(0, 0))
