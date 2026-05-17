@@ -31,7 +31,7 @@ class Settings:
 
             self.fpsEnabled = self.fpsEnabled # Atualiza o estado dos FPS com base no argumento passado para o método run
             self.fpsValue = str(self.clock.get_fps().__round__(2)) # Obtendo o valor atual dos FPS e convertendo para string, arredondando para 2 casas decimais
-            self.wrintingOnTheScreen(self.fpsValue, self.fpsEnabled) # escreve na tela
+            self.wrintingOnTheScreen(self.fpsEnabled, self.fpsValue) # escreve na tela
 
             if self.fpsEnabled == True:
                 self.options = self.optionsFPSOn
@@ -71,7 +71,7 @@ class Settings:
         self.background = Background(name = 'menu_background/menu', position=(0, 0))
         self.background.draw(self.window)            
 
-    def wrintingOnTheScreen(self, fpsValue: str, fpsEnabled: bool) -> None:
+    def wrintingOnTheScreen(self, fpsEnabled: bool, fpsValue: str) -> None:
         self.draw_text(SETTINGS_TITLE, COLOR_WHITE, text_center_pos = (WINDOW_MENU_WIDTH / 2, 100))
 
         if fpsEnabled == True:

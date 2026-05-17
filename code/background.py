@@ -1,11 +1,12 @@
 import os
+from turtle import position
 import pygame
 from const import WINDOW_GAME_HEIGHT, WINDOW_GAME_WIDTH
 
 class Background:
     def __init__(self, name: str, position: tuple):
-        self.loadImages(name)
-        self.rect = self.buildRect(position)
+        self.name = name
+        self.position = position
 
     def loadImages(self, name: str):
         current_dir = os.path.dirname(__file__) # obtém o diretório atual do arquivo background.py
@@ -17,4 +18,10 @@ class Background:
         return self.surf.get_rect(left=position[0], top=position[1]) # cria um retângulo para o background com a posição especificada
 
     def draw(self, window):
-        window.blit(self.surf, self.rect)
+        self.loadImages(self.name) # carrega a imagem do background
+        self.rect = self.buildRect(self.position) # constrói o retângulo para o background
+
+        window.blit(self.surf, self.rect) # desenha a imagem do background na janela do jogo usando o retângulo para posicionamento
+    
+    def drawParalax(self):
+        pass
