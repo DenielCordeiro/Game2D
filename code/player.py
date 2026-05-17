@@ -29,7 +29,7 @@ class Player:
         else:
             pass # Se o player já estiver pulando, não faz nada (impede pulo duplo)
 
-    def update(self):
+    def move(self):
         self.speedJump += self.gravidade # Aplica a gravidade à velocidade de pulo, fazendo o player cair mais rápido com o tempo
         self.lastPosition += self.speedJump # Atualiza a posição vertical do player com base na velocidade de pulo, fazendo ele subir ou descer dependendo do valor de speedJump
 
