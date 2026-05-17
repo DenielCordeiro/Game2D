@@ -40,15 +40,15 @@ class Commands:
             self.clock.tick(60) # Limita a taxa de quadros a 60 FPS
 
     def loadingBackground(self) -> None:  # Carregando tela de fundo
-        self.background = Background(name='menu_background/menu', position=(0, 0))
+        self.background = Background(name = 'menu_background/menu', position = (0, 0), isParalax = False) # Background sem efeito de paralaxe
         self.background.draw(self.window)
         
     def wrintingOnTheScreen(self, fpsValue: str, fpsEnabled: bool) -> None:
         if fpsEnabled == True:
-            self.draw_text(text = 'FPS: ',  text_color = COLOR_WHITE, text_center_pos = (WINDOW_MENU_WIDTH - 80, 20))
+            self.draw_text(text = 'FPS: ',  text_color = COLOR_WHITE, text_center_pos = (WINDOW_MENU_WIDTH - 90, 20))
             self.draw_text(text = fpsValue,  text_color = COLOR_GREEN, text_center_pos = (WINDOW_MENU_WIDTH - 40, 20))
         else:
-            self.draw_text(text = 'FPS: ',  text_color = COLOR_WHITE, text_center_pos = (WINDOW_MENU_WIDTH - 80, 20))
+            self.draw_text(text = 'FPS: ',  text_color = COLOR_WHITE, text_center_pos = (WINDOW_MENU_WIDTH - 90, 20))
             self.draw_text(text = 'OFF',  text_color = COLOR_RED, text_center_pos = (WINDOW_MENU_WIDTH - 40, 20))
 
         self.draw_text(text = COMMANDS_TITLE, text_color = COLOR_WHITE, text_center_pos = (WINDOW_MENU_WIDTH / 2, 100))

@@ -2,6 +2,7 @@ import sys
 import pygame
 
 from background import Background
+from game import Game
 from score import Score
 from commands import Commands
 from settings import Settings
@@ -20,6 +21,7 @@ class Menu:
 
         self.loadingBackground() # Carregando tela de fundo
         self.loadCommands = Commands(self.window) # Carregando tela de comandos
+        self.game = Game(self.window) # Carregando tela de jogo
         self.loadSettings = Settings(self.window) # Carregando tela de ajustes
         self.loadScores = Score(self.window) # Carregando tela de scores
 
@@ -29,7 +31,7 @@ class Menu:
 
     def run(self) -> None: # Carregando tela de fundo
         self.loadCommands.run(self.fpsEnabled) # Carregando tela de comandos
-        
+
         while True:
             self.loadingBackground() 
 
@@ -42,15 +44,15 @@ class Menu:
             self.clock.tick(60) # Limitamos a taxa de quadros a 60 FPS
 
     def loadingBackground(self) -> None: # Carregando tela de fundo
-        self.background = Background(name = 'menu_background/menu', position = (0, 0)) # Criando um objeto de fundo usando a classe Background, com o nome do arquivo de imagem e a posição inicial
+        self.background = Background(name = 'menu_background/menu', position = (0, 0), isParalax = False) # Criando um objeto de fundo usando a classe Background, com o nome do arquivo de imagem e a posição inicial
         self.background.draw(self.window) # Desenhando o fundo na janela do jogo usando o método draw() da classe Background, passando a janela como argumento
 
     def wrintingOnTheScreen(self, fpsValue: str, fpsEnabled: bool) -> None: # Escrevendo na tela
         if fpsEnabled == True:
-            self.draw_text(text = 'FPS: ',  text_color = COLOR_WHITE, text_center_pos = (WINDOW_MENU_WIDTH - 80, 20))
+            self.draw_text(text = 'FPS: ',  text_color = COLOR_WHITE, text_center_pos = (WINDOW_MENU_WIDTH - 90, 20))
             self.draw_text(text = fpsValue,  text_color = COLOR_GREEN, text_center_pos = (WINDOW_MENU_WIDTH - 40, 20))
         else:
-            self.draw_text(text = 'FPS: ',  text_color = COLOR_WHITE, text_center_pos = (WINDOW_MENU_WIDTH - 80, 20))
+            self.draw_text(text = 'FPS: ',  text_color = COLOR_WHITE, text_center_pos = (WINDOW_MENU_WIDTH - 90, 20))
             self.draw_text(text = 'OFF',  text_color = COLOR_RED, text_center_pos = (WINDOW_MENU_WIDTH - 40, 20))
     
         # Adicione um título para o menu se quiser!
@@ -85,7 +87,7 @@ class Menu:
     def executingOption(self, option: int, fpsEnabled: bool) -> None: # Executando opção selecionada
         match option:
             case 0: # JOGAR
-                print('Exibindo os Jogo...')
+                self.game.run(fpsEnabled) # Iniciando o loop principal do jogo, passando o estado dos FPS como argumento
             case 1: # COMANDOS
                 self.loadCommands.run(fpsEnabled)
             case 2: # AJUSTES

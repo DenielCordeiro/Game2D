@@ -68,7 +68,7 @@ class Settings:
             self.clock.tick(60) # Limita o FPS a 60
 
     def loadingBackground(self) -> None:  # Carregando tela de fundo
-        self.background = Background(name = 'menu_background/menu', position=(0, 0))
+        self.background = Background(name = 'menu_background/menu', position=(0, 0), isParalax = False) # Criando um objeto de fundo usando a classe Background, com o nome do arquivo de imagem e a posição inicial
         self.background.draw(self.window)            
 
     def wrintingOnTheScreen(self, fpsEnabled: bool, fpsValue: str) -> None:
@@ -78,13 +78,13 @@ class Settings:
             for i in range(len(self.optionsFPSOff)):
                 color = COLOR_GREEN if i == self.option else COLOR_WHITE
                 self.draw_text(text = self.optionsFPSOff[i], text_color =  color, text_center_pos = (WINDOW_MENU_WIDTH / 2, 200 + 40 * i))
-                self.draw_text( text = 'FPS: ',  text_color = COLOR_WHITE, text_center_pos = (WINDOW_MENU_WIDTH - 80, 20))
+                self.draw_text( text = 'FPS: ',  text_color = COLOR_WHITE, text_center_pos = (WINDOW_MENU_WIDTH - 90, 20))
                 self.draw_text( text = fpsValue,  text_color = COLOR_GREEN, text_center_pos = (WINDOW_MENU_WIDTH - 40, 20))
         else:
             for i in range(len(self.optionsFPSOn)):
                 color = COLOR_GREEN if i == self.option else COLOR_WHITE
                 self.draw_text(text = self.optionsFPSOn[i],  text_color = color, text_center_pos = (WINDOW_MENU_WIDTH / 2, 200 + 40 * i))
-                self.draw_text(text = 'FPS: ',  text_color = COLOR_WHITE, text_center_pos = (WINDOW_MENU_WIDTH - 80, 20))
+                self.draw_text(text = 'FPS: ',  text_color = COLOR_WHITE, text_center_pos = (WINDOW_MENU_WIDTH - 90, 20))
                 self.draw_text(text = 'OFF',  text_color = COLOR_RED, text_center_pos = (WINDOW_MENU_WIDTH - 40, 20))
                 
     def draw_text(self, text: str, text_color: tuple, text_center_pos: tuple) -> None:
