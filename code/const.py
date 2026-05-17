@@ -25,7 +25,7 @@ MENU_TITLE = 'MENU PRINCIPAL'
 COMMANDS_TITLE = 'MENU DE COMANDOS'
 COMMANDS_GAME = ('JOGO:', 'Space - Pular')
 COMMANDS = ('MENU:', 'Seta para Cima ↑ - Subir', 'Seta para baico ↓ - Descer', 'Enter - Selecionar')
-COMMANDS_RETURN = ('Prescione ENTER para continuar.')
+COMMANDS_RETURN = 'Pressione ENTER para continuar.'
 
 # SETTINGS
 SETTINGS_TITLE = 'MENU DE AJUSTES'
@@ -40,5 +40,3 @@ WINDOW_MENU_WIDTH = 640
 WINDOW_MENU_HEIGHT = 450
 
 # GAME
-
-PLAYER_SPEED = 2

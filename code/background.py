@@ -46,7 +46,7 @@ class Background:
 
     def loadLayer(self, basePath: str):
         try:
-            self.files = sorted([f for f in os.listdir(basePath) if f.endswith('.png')]) # Lista os arquivos na pasta do background e filtra apenas os arquivos PNG, ordenando-os em ordem alfabética
+            self.files = sorted([f for f in os.listdir(basePath) if f.lower().endswith('.png')]) # lista e ordena todos os arquivos PNG.
         except FileNotFoundError:
             print(f"Erro: A pasta {basePath} não foi encontrada!")
             return
