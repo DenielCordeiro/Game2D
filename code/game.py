@@ -4,7 +4,12 @@ import pygame
 from background import Background
 from obstacle import Obstacle
 from player import Player
-from const import COLOR_GREEN, COLOR_RED, COLOR_WHITE, WINDOW_MENU_WIDTH
+from const import (
+    COLOR_GREEN,
+    COLOR_RED,
+    COLOR_WHITE,
+    WINDOW_MENU_WIDTH,
+)
 
 class Game:
     def __init__(self, window):
@@ -13,7 +18,7 @@ class Game:
         self.clock = pygame.time.Clock() # Criando um objeto de relógio para controlar a taxa de quadros do jogo.
 
         self.backgroundParalax = Background(name='game_background', position=(0, 0), isParalax = True) # importando o fundo do jogo.
-        self.obstacle = Obstacle() # Criando um obstáculo na posição y=380.
+        self.obstacle = Obstacle(startPosition = WINDOW_MENU_WIDTH) # Criando um obstáculo na posição y=380.
         self.player = Player() # Criando o player.
 
     def run(self, fpsEnabled: bool) -> None:
@@ -26,6 +31,8 @@ class Game:
 
             self.player.move() # Movimento do player
             self.player.draw(self.window) # Desenhando player.
+
+            self.checkingCollision() # Verificando colisão entre player e obstáculo.
 
             self.wrinttingOnTheScreen(fpsEnabled, self.fpsValue) # escreve na tela
 
@@ -46,6 +53,17 @@ class Game:
 
     def loadingBackground(self) -> None:
         self.backgroundParalax.drawingParalax(self.window) # Desenhando o fundo com efeito de paralaxe na janela do jogo.
+
+    def checkingCollision(self) -> None:
+        if self.player.rect.colliderect(self.obstacle.rect): # Verificando se o retângulo do player colidiu com o retângulo do obstáculo.
+            print(f"GAME OVER! Pontuação final: {self.score}")
+            
+        if self.player.positionX > self.obstacle.positionX and not self.obstacle.passed: # Verificando se o player passou do obstáculo.
+            self.score += 10
+            self.obstacle.passed = True 
+            
+        if self.obstacle.positionX < -self.obstacle.width: # Verificando se o obstáculo saiu completamente da tela.
+            self.obstacle = Obstacle(startPosition = WINDOW_MENU_WIDTH) 
 
     def wrinttingOnTheScreen(self, fpsEnabled: bool, fpsValue: str) -> None:
         if fpsEnabled == True:

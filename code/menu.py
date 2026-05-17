@@ -7,7 +7,15 @@ from score import Score
 from commands import Commands
 from settings import Settings
 
-from const import COLOR_GREEN, COLOR_RED, COLOR_WHITE, WINDOW_MENU_WIDTH, WINDOW_MENU_HEIGHT, MENU_OPTIONS, MENU_TITLE
+from const import (
+    COLOR_GREEN,
+    COLOR_RED, 
+    COLOR_WHITE,
+    WINDOW_MENU_WIDTH, 
+    WINDOW_MENU_HEIGHT, 
+    MENU_OPTIONS, 
+    MENU_TITLE,
+)
 
 class Menu:
     def __init__(self): # inicializando Menu

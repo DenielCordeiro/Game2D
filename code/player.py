@@ -1,6 +1,10 @@
 import os
 import pygame
-from const import  COLOR_RED, PLAYER_WIDTH, PLAYER_HEIGHT, WINDOW_GAME_HEIGHT
+from const import  (
+    PLAYER_WIDTH,
+    PLAYER_HEIGHT,
+    WINDOW_GAME_HEIGHT,
+)
 
 class Player:
     def __init__(self):
