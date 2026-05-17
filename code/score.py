@@ -4,7 +4,7 @@ class Score:
         self.score: int = 0
         self.scores: list[int] = []
 
-    def run(self) -> None:
+    def run(self, fpsEnabled: bool) -> None:
         pass
 
     def addScore(self, points: int) -> None:
