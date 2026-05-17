@@ -2,6 +2,7 @@ import sys
 import pygame
 
 from background import Background
+from player import Player
 from const import COLOR_GREEN, COLOR_RED, COLOR_WHITE, WINDOW_MENU_WIDTH
 
 class Game:
@@ -9,7 +10,8 @@ class Game:
         self.window = window
         self.font = pygame.font.SysFont("arial", 14) # Criando um objeto de fonte usando a fonte Arial com tamanho 20  
         self.clock = pygame.time.Clock() # Criando um objeto de relógio para controlar a taxa de quadros do jogo
-        self.backgroundParalax = Background(name='game_background', position=(0, 0), isParalax=True)
+        self.backgroundParalax = Background(name='game_background', position=(0, 0), isParalax = True) # importando o fundo do jogo.
+        self.player = Player()
 
     def run(self, fpsEnabled: bool) -> None:
         while True:
@@ -17,15 +19,22 @@ class Game:
             self.wrinttingOnTheScreen(fpsEnabled, self.fpsValue) # escreve na tela
             self.loadingBackground()
 
+            # 3. Atualiza a física do player e desenha ele na tela
+            self.player.update()
+            self.player.draw(self.window)
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:  # Fechando o jogo
                     pygame.quit()  # Fechando o pygame
                     sys.exit()  # saindo do programa
 
                 if event.type == pygame.KEYDOWN: # Capturando opção selecionada
-                    if event.key == pygame.K_ESCAPE: # Pressionando ESC para voltar ao menu
+                    if event.key == pygame.K_SPACE: # Se pressionar ESPAÇO, o player pula
+                        self.player.jump()
+                        
+                    if event.key == pygame.K_ESCAPE:
                         return
-
+                    
             pygame.display.flip() # Atualiza a tela
             self.clock.tick(60) # Limita a taxa de quadros a 60 FPS
 
