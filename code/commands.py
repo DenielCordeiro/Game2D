@@ -18,8 +18,12 @@ from const import (
 class Commands:
     def __init__(self, window): # inicializando Menu
         self.window = window # Recebendo a janela do jogo para desenhar os comandos
+
+        self.background = Background(name='menu_background/menu', position=(0, 0), isParalax = False) # Cria o plano de fundo
+
         self.font = pygame.font.SysFont("arial", 20) # Criando fonte para os textos
         self.clock = pygame.time.Clock() # Criando um relógio para controlar a taxa de quadros
+        self.fpsValue = None
 
     def run(self, fpsEnabled: bool) -> None: # Loop principal do menu de comandos
         while True:
@@ -40,7 +44,6 @@ class Commands:
             self.clock.tick(30) # Limita a taxa de quadros a 60 FPS
 
     def loadingBackground(self) -> None:  # Carregando tela de fundo
-        self.background = Background(name = 'menu_background/menu', position = (0, 0), isParalax = False) # Background sem efeito de paralaxe
         self.background.draw(self.window)
         
     def wrintingOnTheScreen(self, fpsValue: str, fpsEnabled: bool) -> None:

@@ -27,13 +27,13 @@ class Menu:
         self.option: int = 0 # Variável para controlar a opção atualmente selecionada no menu, iniciando com a primeira opção (índice 0)
         self.fpsEnabled: bool = False # Variável para controlar se os FPS estão habilitados ou não
 
-        self.loadingBackground() # Carregando tela de fundo
+        self.background = Background(name = 'menu_background/menu', position = (0, 0), isParalax = False) # Carregando tela de fundo
         self.loadCommands = Commands(self.window) # Carregando tela de comandos
         self.game = Game(self.window) # Carregando tela de jogo
         self.loadSettings = Settings(self.window) # Carregando tela de ajustes
         self.loadScores = Score(self.window) # Carregando tela de scores
 
-        self.fpsValue = str(self.clock.get_fps().__round__(2)) # Obtendo o valor atual dos FPS e convertendo para string, arredondando para 2 casas decimais
+        self.fpsValue = None
 
         self.run() # Iniciando o loop principal do menu, passando o estado dos FPS como argumento
 
@@ -41,8 +41,7 @@ class Menu:
         self.loadCommands.run(self.fpsEnabled) # Carregando tela de comandos
 
         while True:
-            self.loadingBackground() 
-
+            self.loadingBackground()
             self.fpsValue = str(self.clock.get_fps().__round__(2)) # Obtendo o valor atual dos FPS e convertendo para string, arredondando para 2 casas decimais
             self.wrintingOnTheScreen(self.fpsValue, self.fpsEnabled) # Escrevendo na tela
 
@@ -52,7 +51,6 @@ class Menu:
             self.clock.tick(30) # Limitamos a taxa de quadros a 60 FPS
 
     def loadingBackground(self) -> None: # Carregando tela de fundo
-        self.background = Background(name = 'menu_background/menu', position = (0, 0), isParalax = False) # Criando um objeto de fundo usando a classe Background, com o nome do arquivo de imagem e a posição inicial
         self.background.draw(self.window) # Desenhando o fundo na janela do jogo usando o método draw() da classe Background, passando a janela como argumento
 
     def wrintingOnTheScreen(self, fpsValue: str, fpsEnabled: bool) -> None: # Escrevendo na tela

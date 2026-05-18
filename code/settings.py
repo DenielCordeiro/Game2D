@@ -15,6 +15,8 @@ from const import (
 class Settings:
     def __init__(self, window):
         self.window = window
+
+        self.background = Background(name='menu_background/menu', position=(0, 0), isParalax = False)  # Cria o plano de fundo
         self.font = pygame.font.SysFont("arial", 20) # Criando um objeto de fonte usando a fonte Arial com tamanho 20
         self.clock = pygame.time.Clock() # Verifica os FPS
 
@@ -68,8 +70,7 @@ class Settings:
             self.clock.tick(30) # Limita o FPS a 60
 
     def loadingBackground(self) -> None:  # Carregando tela de fundo
-        self.background = Background(name = 'menu_background/menu', position=(0, 0), isParalax = False) # Criando um objeto de fundo usando a classe Background, com o nome do arquivo de imagem e a posição inicial
-        self.background.draw(self.window)            
+        self.background.draw(self.window)
 
     def wrintingOnTheScreen(self, fpsEnabled: bool, fpsValue: str) -> None:
         self.draw_text(SETTINGS_TITLE, COLOR_WHITE, text_center_pos = (WINDOW_MENU_WIDTH / 2, 100))
