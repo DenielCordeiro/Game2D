@@ -9,6 +9,7 @@ from const import (
     COLOR_RED,
     COLOR_WHITE,
     WINDOW_MENU_WIDTH,
+    PLAYER_SCORE,
 )
 
 class Game:
@@ -21,7 +22,11 @@ class Game:
         self.obstacle = Obstacle(startPosition = WINDOW_MENU_WIDTH) # Criando um obstáculo na posição y=380.
         self.player = Player() # Criando o player.
 
+        self.score: int = PLAYER_SCORE
+
     def run(self, fpsEnabled: bool) -> None:
+        self.reset()
+
         while True:
             self.fpsValue = str(self.clock.get_fps().__round__(2)) # Obtendo o valor atual dos FPS e convertendo para string, arredondando para 2 casas decimais
             self.loadingBackground()
@@ -32,7 +37,7 @@ class Game:
             self.player.move() # Movimento do player
             self.player.draw(self.window) # Desenhando player.
 
-            self.checkingCollision() # Verificando colisão entre player e obstáculo.
+            self.isCollision: bool = self.checkingCollision() # Verificando colisão entre player e obstáculo.
 
             self.wrinttingOnTheScreen(fpsEnabled, self.fpsValue) # escreve na tela
 
@@ -47,23 +52,38 @@ class Game:
                         
                     if event.key == pygame.K_ESCAPE:
                         return
-                    
+
+            if self.isCollision == True:
+                return
+
             pygame.display.flip() # Atualiza a tela
             self.clock.tick(60) # Limita a taxa de quadros a 60 FPS
 
-    def loadingBackground(self) -> None:
-        self.backgroundParalax.drawingParalax(self.window) # Desenhando o fundo com efeito de paralaxe na janela do jogo.
+    def checkingCollision(self) -> bool:
+        playerHitbox = self.player.rect.inflate(-95, -20)
+        obstacleHitbox = self.obstacle.rect.inflate(-10, -5)
 
-    def checkingCollision(self) -> None:
-        if self.player.rect.colliderect(self.obstacle.rect): # Verificando se o retângulo do player colidiu com o retângulo do obstáculo.
+        if playerHitbox.colliderect(obstacleHitbox): # Checar colisão usando as hitboxes virtuais
             print(f"GAME OVER! Pontuação final: {self.score}")
-            
+            return True
+
         if self.player.positionX > self.obstacle.positionX and not self.obstacle.passed: # Verificando se o player passou do obstáculo.
             self.score += 10
-            self.obstacle.passed = True 
-            
+            self.obstacle.passed = True
+            print('SCORE: ', self.score)
+
         if self.obstacle.positionX < -self.obstacle.width: # Verificando se o obstáculo saiu completamente da tela.
-            self.obstacle = Obstacle(startPosition = WINDOW_MENU_WIDTH) 
+            self.obstacle = Obstacle(startPosition = WINDOW_MENU_WIDTH)
+
+        return False
+
+    def reset(self) -> None:
+        self.player = Player() # Recria o jogador na posição inicial
+        self.obstacle = Obstacle(startPosition=WINDOW_MENU_WIDTH)  # Recria o obstáculo
+        self.score = 0 # Zera a pontuação do placar
+
+    def loadingBackground(self) -> None:
+        self.backgroundParalax.drawingParalax(self.window) # Desenhando o fundo com efeito de paralaxe na janela do jogo.
 
     def wrinttingOnTheScreen(self, fpsEnabled: bool, fpsValue: str) -> None:
         if fpsEnabled == True:

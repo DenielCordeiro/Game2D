@@ -13,7 +13,7 @@ class Obstacle:
         self.width = OBSTACLE_WIDTH
         self.height = OBSTACLE_HEIGHT
         self.positionX: int = startPosition + OBSTACLE_WIDTH
-        self.positionY: int = WINDOW_GAME_HEIGHT - 45
+        self.positionY: int = WINDOW_GAME_HEIGHT - (OBSTACLE_HEIGHT * 2)
 
         self.rect = pygame.Rect(self.positionX, self.positionY, self.width, self.height) # caixa de colisão do obstáculo.
         self.passed = False # veriricar se o obstáculo já passou do jogador para pontuação.
