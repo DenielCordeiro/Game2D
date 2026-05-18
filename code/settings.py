@@ -65,7 +65,7 @@ class Settings:
                             return self.fpsEnabled
 
             pygame.display.flip() # Atualiza a tela
-            self.clock.tick(60) # Limita o FPS a 60
+            self.clock.tick(30) # Limita o FPS a 60
 
     def loadingBackground(self) -> None:  # Carregando tela de fundo
         self.background = Background(name = 'menu_background/menu', position=(0, 0), isParalax = False) # Criando um objeto de fundo usando a classe Background, com o nome do arquivo de imagem e a posição inicial

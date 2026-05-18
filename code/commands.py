@@ -37,7 +37,7 @@ class Commands:
                         return # Sai do loop do run e volta para quem chamou
 
             pygame.display.flip() # Atualiza a tela
-            self.clock.tick(60) # Limita a taxa de quadros a 60 FPS
+            self.clock.tick(30) # Limita a taxa de quadros a 60 FPS
 
     def loadingBackground(self) -> None:  # Carregando tela de fundo
         self.background = Background(name = 'menu_background/menu', position = (0, 0), isParalax = False) # Background sem efeito de paralaxe

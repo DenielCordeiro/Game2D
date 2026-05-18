@@ -14,6 +14,7 @@ from const import (
 
 class Game:
     def __init__(self, window):
+        self.playerHitbox = None
         self.window = window
         self.font = pygame.font.SysFont("arial", 14) # Criando um objeto de fonte usando a fonte Arial com tamanho 20. 
         self.clock = pygame.time.Clock() # Criando um objeto de relógio para controlar a taxa de quadros do jogo.

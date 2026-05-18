@@ -49,7 +49,7 @@ class Menu:
             self.capturingSelectedOption(self.fpsEnabled) # Capturando opção selecionada
 
             pygame.display.flip() # Atualizamos a tela (importante!)
-            self.clock.tick(60) # Limitamos a taxa de quadros a 60 FPS
+            self.clock.tick(30) # Limitamos a taxa de quadros a 60 FPS
 
     def loadingBackground(self) -> None: # Carregando tela de fundo
         self.background = Background(name = 'menu_background/menu', position = (0, 0), isParalax = False) # Criando um objeto de fundo usando a classe Background, com o nome do arquivo de imagem e a posição inicial
