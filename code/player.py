@@ -21,9 +21,9 @@ class Player:
         self.jumpForce = -15 # Força inicial do pulo 
         self.isJump = False # Garante que ele não pule no ar (anula pulo duplo)
 
-        currentDir = os.path.dirname(os.path.abspath(__file__)) # Obtendo o diretório atual do arquivo player.py
-        imagePath = os.path.join(currentDir, '..', 'assets', 'player', 'player.png') # Caminho para imagem do player.
-        self.surf = pygame.image.load(imagePath).convert_alpha() # carregando a imagem do player e convertendo para um formato otimizado.
+        self.currentDir: str = os.path.dirname(os.path.abspath(__file__)) # Obtendo o diretório atual do arquivo player.py
+        self.imagePath = os.path.join(self.currentDir, '..', 'assets', 'player', 'player.png') # Caminho para imagem do player.
+        self.surf = pygame.image.load(self.imagePath).convert_alpha() # carregando a imagem do player e convertendo para um formato otimizado.
         self.surf = pygame.transform.scale(self.surf, (self.width, self.height))  # Redimensionando a imagem do player.
 
     def jump(self):

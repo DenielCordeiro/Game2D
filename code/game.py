@@ -61,7 +61,7 @@ class Game:
 
     def checkingCollision(self) -> bool:
         playerHitbox = self.player.rect.inflate(-95, -20)
-        obstacleHitbox = self.obstacle.rect.inflate(-10, -5)
+        obstacleHitbox = self.obstacle.rect.inflate(-70, -80)
 
         if playerHitbox.colliderect(obstacleHitbox): # Checar colisão usando as hitboxes virtuais
             print(f"GAME OVER! Pontuação final: {self.score}")
