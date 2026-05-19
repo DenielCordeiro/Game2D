@@ -57,25 +57,27 @@ class Game:
                         return
 
             if self.isCollision == True:
-                return
+                break
 
             pygame.display.flip() # Atualiza a tela
             self.clock.tick(60) # Limita a taxa de quadros a 60 FPS
+
+        self.scores.addScore(self.points) # Atualizando o placar com a pontuação atual
+        return
 
     def checkingCollision(self) -> bool:
         playerHitbox = self.player.rect.inflate(-95, -20)
         obstacleHitbox = self.obstacle.rect.inflate(-70, -80)
 
         if playerHitbox.colliderect(obstacleHitbox): # Checar colisão usando as hitboxes virtuais
-            self.scores.addScore(self.points) # Atualizando o placar com a pontuação atual
             return True
 
-        if self.player.positionX > self.obstacle.positionX and not self.obstacle.passed: # Verificando se o player passou do obstáculo.
+        if not self.obstacle.passed and self.player.positionX > self.obstacle.positionX:
             self.points += 10
             self.obstacle.passed = True
 
         if self.obstacle.positionX < -self.obstacle.width: # Verificando se o obstáculo saiu completamente da tela.
-            self.obstacle = Obstacle(startPosition = WINDOW_MENU_WIDTH)
+            self.obstacle.reset(startPosition = WINDOW_MENU_WIDTH) # Reposicionando o obstáculo para a posição inicial.
 
         return False
 
