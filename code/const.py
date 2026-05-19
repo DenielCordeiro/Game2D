@@ -24,7 +24,7 @@ MENU_TITLE = 'MENU PRINCIPAL'
 
 # COMMANDS
 COMMANDS_TITLE = 'MENU DE COMANDOS'
-COMMANDS_GAME = ('JOGO:', 'Space - Pular')
+COMMANDS_GAME = ('JOGO:', 'Space - Pular', 'ESC - Menu')
 COMMANDS = ('MENU:', 'Seta para Cima ↑ - Subir', 'Seta para baico ↓ - Descer', 'Enter - Selecionar')
 COMMANDS_RETURN = 'Pressione ENTER para continuar.'
 
@@ -33,6 +33,11 @@ SETTINGS_TITLE = 'MENU DE AJUSTES'
 SETTINGS_SHOW_FPS = 'MOSTRAR FPS'
 SETTINGS_HIDDEN_FPS = 'ESCONDER FPS'
 SETTINGS_RETURN = 'VOLTAR'
+
+# SCORES
+SCORES_TITLE = 'SCORES' 
+SCORES_BUTTONS = ('Continuar', 'Limpar Pontuações')
+
 
 # PLAYER
 PLAYER_SPEED = 1.2

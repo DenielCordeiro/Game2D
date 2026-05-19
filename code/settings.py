@@ -67,7 +67,7 @@ class Settings:
                             return self.fpsEnabled
 
             pygame.display.flip() # Atualiza a tela
-            self.clock.tick(30) # Limita o FPS a 60
+            self.clock.tick(30) # Limita o FPS a 30
 
     def loadingBackground(self) -> None:  # Carregando tela de fundo
         self.background.draw(self.window)

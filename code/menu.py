@@ -3,7 +3,7 @@ import pygame
 
 from background import Background
 from game import Game
-from score import Score
+from score import Scores
 from commands import Commands
 from settings import Settings
 
@@ -31,7 +31,7 @@ class Menu:
         self.loadCommands = Commands(self.window) # Carregando tela de comandos
         self.game = Game(self.window) # Carregando tela de jogo
         self.loadSettings = Settings(self.window) # Carregando tela de ajustes
-        self.loadScores = Score(self.window) # Carregando tela de scores
+        self.loadScores = Scores(self.window) # Carregando tela de scores
 
         self.fpsValue = None
 
@@ -48,7 +48,7 @@ class Menu:
             self.capturingSelectedOption(self.fpsEnabled) # Capturando opção selecionada
 
             pygame.display.flip() # Atualizamos a tela (importante!)
-            self.clock.tick(30) # Limitamos a taxa de quadros a 60 FPS
+            self.clock.tick(30) # Limitamos a taxa de quadros a 30 FPS
 
     def loadingBackground(self) -> None: # Carregando tela de fundo
         self.background.draw(self.window) # Desenhando o fundo na janela do jogo usando o método draw() da classe Background, passando a janela como argumento
@@ -99,7 +99,7 @@ class Menu:
             case 2: # AJUSTES
                 self.fpsEnabled = self.loadSettings.run() # Atualizando o estado dos FPS com base no retorno do menu de ajustes
             case 3: # SCORES
-                self.loadScores.run(fpsEnabled)
+                self.loadScores.run(fpsEnabled) # Iniciando o loop principal do menu de scores, passando o estado dos FPS como argumento
             case 4: # SAIR
                 pygame.quit()
                 sys.exit()

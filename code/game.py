@@ -4,7 +4,7 @@ import pygame
 from background import Background
 from obstacle import Obstacle
 from player import Player
-from score import Score
+from score import Scores
 from const import (
     COLOR_GREEN,
     COLOR_RED,
@@ -23,7 +23,7 @@ class Game:
         self.backgroundParalax = Background(name='game_background', position=(0, 0), isParalax = True) # importando o fundo do jogo.
         self.obstacle = Obstacle(startPosition = WINDOW_MENU_WIDTH) # Criando um obstáculo na posição y=380.
         self.player = Player() # Criando o player.
-        self.score = Score(window)
+        self.scores = Scores(window)
 
         self.points: int = PLAYER_SCORE
 
@@ -67,7 +67,7 @@ class Game:
         obstacleHitbox = self.obstacle.rect.inflate(-70, -80)
 
         if playerHitbox.colliderect(obstacleHitbox): # Checar colisão usando as hitboxes virtuais
-            print(f"GAME OVER! Pontuação final: {self.score}")
+            self.scores.addScore(self.points) # Atualizando o placar com a pontuação atual
             return True
 
         if self.player.positionX > self.obstacle.positionX and not self.obstacle.passed: # Verificando se o player passou do obstáculo.
@@ -95,8 +95,8 @@ class Game:
             self.draw_text(text = 'FPS: ',  text_color = COLOR_WHITE, text_center_pos = (WINDOW_MENU_WIDTH - 80, 20))
             self.draw_text(text = 'OFF',  text_color = COLOR_RED, text_center_pos = (WINDOW_MENU_WIDTH - 40, 20))
 
-        self.draw_text(text = 'Pontuação', text_color = COLOR_WHITE, text_center_pos = (WINDOW_MENU_WIDTH - 180, 20))
-        self.draw_text(text = f'{self.points}', text_color = COLOR_GREEN, text_center_pos = (WINDOW_MENU_WIDTH - 140, 20))
+        self.draw_text(text = 'Pontuação:', text_color = COLOR_WHITE, text_center_pos = (WINDOW_MENU_WIDTH - 180, 20))
+        self.draw_text(text = f'{self.points}', text_color = COLOR_GREEN, text_center_pos = (WINDOW_MENU_WIDTH - 130, 20))
 
 
     def draw_text(self, text: str, text_color: tuple, text_center_pos: tuple) -> None:
