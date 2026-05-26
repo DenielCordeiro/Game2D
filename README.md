@@ -25,7 +25,7 @@ A demo foi compilada em um arquivo executável (`.exe`). Isso significa que **vo
 
 ### 1. Baixar o Jogo
 * Acesse o link do projeto no [Google Drive](https://drive.google.com/drive/folders/1kkDaLm78KvU-3a8Lk4bcrX0K_yV8I7Rc?usp=sharing).
-* Faça o download do arquivo compactado `Pumpkindash.zip`.
+* Faça o download do arquivo compactado `workUninter.rar`.
 
 ### 2. Extrair os Arquivos
 * Clique com o botão direito no arquivo baixado e selecione **"Extrair Aqui"** (usando WinRAR, 7-Zip ou o próprio Windows).
