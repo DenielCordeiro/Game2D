@@ -24,7 +24,7 @@ O foco principal do desenvolvimento foi aplicar boas práticas de programação,
 A demo foi compilada em um arquivo executável (`.exe`). Isso significa que **você não precisa ter o Python ou o Pygame instalados** no seu computador para jogar.
 
 ### 1. Baixar o Jogo
-* Acesse o link do projeto no [Google Drive](INSERIR_LINK_DO_SEU_DRIVE_AQUI).
+* Acesse o link do projeto no [Google Drive]([INSERIR_LINK_DO_SEU_DRIVE_AQUI](https://drive.google.com/drive/folders/1kkDaLm78KvU-3a8Lk4bcrX0K_yV8I7Rc?usp=sharing)).
 * Faça o download do arquivo compactado `Pumpkindash.zip`.
 
 ### 2. Extrair os Arquivos
